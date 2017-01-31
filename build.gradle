@@ -24,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.illposed.osc/javaosc-core
+    compile group: 'com.illposed.osc', name: 'javaosc-core', version: '0.3'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
