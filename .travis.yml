@@ -10,11 +10,12 @@ addons:
             - llvm-toolchain-precise-3.6
             - george-edison55-precise-backports
         packages:
-            - gcc-5
             - g++-5
-            - clang-3.6
             - cmake
             - cmake-data
+            - libboost-dev
+            - libboost-system-dev
+            - libboost-chrono-dev
 
 script:
     - mkdir build
