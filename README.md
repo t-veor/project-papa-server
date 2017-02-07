@@ -2,7 +2,7 @@
 
 This is the server counterpart to the Project Papa project.
 
-# Usage
+## Usage
 
 To use, clone the repository and use cmake to build.
 
