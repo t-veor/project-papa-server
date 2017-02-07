@@ -1,110 +1,47 @@
+build/
 
-# Created by https://www.gitignore.io/api/gradle,eclipse,intellij+iml
+# c++
 
-### Eclipse ###
+# Prerequisites
+*.d
 
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
 
-# Eclipse Core
-.project
+# Precompiled Headers
+*.gch
+*.pch
 
-# External tool builders
-.externalToolBuilders/
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
 
-# Locally stored "Eclipse launch configurations"
-*.launch
+# Fortran module files
+*.mod
+*.smod
 
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
 
-# CDT-specific (C/C++ Development Tooling)
-.cproject
+# Executables
+*.exe
+*.out
+*.app
 
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
-# Java annotation processor (APT)
-.factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
-.springBeans
-
-# Code Recommenders
-.recommenders/
-
-
-### Intellij+iml ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
-# User-specific stuff:
-.idea/
-
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-### Intellij+iml Patch ###
-# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
-
-*.iml
-modules.xml
-.idea/misc.xml
-*.ipr
-
-
-### Gradle ###
-.gradle
-/build/
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
-
-# End of https://www.gitignore.io/api/gradle,eclipse,intellij+iml
+# cmake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
