@@ -1,23 +1,21 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set (CMAKE_CXX_STANDARD 11)
-
 project(project_papa_server)
 
-include_directories(include)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 11)
 
-file(GLOB SOURCES "src/*.cpp")
+set(DEBUG_FLAGS "-std=c++11 -g -O1 -Wall -Wextra -Werror -pedantic")
+set(RELEASE_FLAGS "-std=c++11 -O3 -Wall -Wextra -Werror -pedantic")
 
-add_executable(server ${SOURCES})
+set(CMAKE_CXX_FLAGS ${RELEASE_FLAGS})
+set(CMAKE_CXX_FLAGS_DEBUG ${DEBUG_FLAGS})
+set(CMAKE_CONFIGURATION_TYPES Debug Release)
 
-target_link_libraries(server rt)
-target_link_libraries(server pthread)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-# Boost
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost REQUIRED COMPONENTS system chrono)
-include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(server ${Boost_LIBRARIES})
+enable_testing()
+
+add_subdirectory(src)
+add_subdirectory(test)
+
