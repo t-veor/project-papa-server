@@ -11,7 +11,7 @@ target_link_libraries(server pthread)
 set(Boost_USE_STATIC_LIBS OFF) 
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system chrono)
 include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(server ${Boost_LIBRARIES})
 
