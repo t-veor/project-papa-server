@@ -1,24 +1,21 @@
 # Use new trusty images, should yield newer compilers and packages
 sudo: required
-dist: precise
+dist: trusty
 language: cpp
 
 addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-            - george-edison55-precise-backports
         packages:
-            - g++-5
-            - cmake
-            - cmake-data
             - libboost-dev
+            - libboost-chrono-dev
             - libboost-system-dev
 
 script:
     - mkdir build
     - cd build
-    - cmake -DCMAKE_CXX_COMPILER=g++-5 ..
+    - cmake ..
     - make
     - make test
+
