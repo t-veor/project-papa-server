@@ -16,6 +16,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 enable_testing()
 
+add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)
 

@@ -1,0 +1,3 @@
+include_directories(websocketpp)
+include_directories(server_shm)
+include_directories(oscpkt)

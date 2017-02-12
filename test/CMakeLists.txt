@@ -1,6 +1,7 @@
 message(STATUS "Building tests")
 
 include_directories("../include")
+include_directories("../lib/catch")
 
 file(GLOB SOURCES "*.cpp")
 
