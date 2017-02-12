@@ -1,4 +1,4 @@
-include_directories("../include")
+include_directories(${INCLUDE_DIRECTORIES})
 
 file(GLOB SOURCES "*.cpp")
 

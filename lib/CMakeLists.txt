@@ -1,3 +1,9 @@
-include_directories(websocketpp)
-include_directories(server_shm)
-include_directories(oscpkt)
+set(INCLUDE_DIRECTORIES
+    ${CMAKE_CURRENT_SOURCE_DIR}/websocketpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/server_shm
+    ${CMAKE_CURRENT_SOURCE_DIR}/oscpkt
+    PARENT_SCOPE)
+
+set(INCLUDE_CATCH_DIRECTORY
+    ${CMAKE_CURRENT_SOURCE_DIR}/catch
+    PARENT_SCOPE)
