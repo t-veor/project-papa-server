@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-OSCSender::OSCSender(int port) : port(port) {
+osc_sender::osc_sender(int port) : port(port) {
 }
 
-void OSCSender::sendOSC(oscpkt::Message m) {
+void osc_sender::send_osc(oscpkt::Message m) {
     oscpkt::UdpSocket sock;
     sock.connectTo("127.0.0.1", port);
     if (!sock.isOk()) {

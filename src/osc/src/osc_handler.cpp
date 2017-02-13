@@ -1,12 +1,12 @@
 #include "osc_handler.h"
 
-OSCHandler::OSCHandler() :
+osc_handler::osc_handler() :
     signal_server_stop(false),
     server_started(true)
 {
 }
 
-void OSCHandler::handleMessage(std::vector<char> buffer) {
+void osc_handler::handle_message(std::vector<char> buffer) {
     pr.init(buffer.data(), buffer.size());
 
     oscpkt::Message* msg;
@@ -15,7 +15,7 @@ void OSCHandler::handleMessage(std::vector<char> buffer) {
     }
 }
 
-void OSCHandler::handle(oscpkt::Message* msg) {
+void osc_handler::handle(oscpkt::Message* msg) {
     if (msg->match("/exited")) {
         signal_server_stop = true;
     }

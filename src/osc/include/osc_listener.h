@@ -10,42 +10,39 @@
 #define LISTEN_TIMEOUT 30
 
 /**
- * A server listening to OSC messages.
- * Listens to UDP OSC messages on the specified port and handles them with the
- * OSCHandler object provided.
+ * A server listening to OSC messages.  Listens to UDP OSC messages on the
+ * specified port and handles them with the osc_handler object provided.
  */
-class OSCListener {
+class osc_listener {
     public:
         /**
-         * Constructs an OSCListener.
-         * @param handler_ptr A unique_ptr to the handler you wish this
-         *                    OSCListener to handle messages with. Note that to
-         *                    pass it to the constructor you will need to first
-         *                    create a unique_ptr and then use std::move to
-         *                    pass it in.
-         * @param port the port you want the listener to listen on
+         * Constructs an osc_listener.  @param handler_ptr A unique_ptr to the
+         * handler you wish this osc_listener to handle messages with. Note
+         * that to pass it to the constructor you will need to first create a
+         * unique_ptr and then use std::move to pass it in.  @param port the
+         * port you want the listener to listen on
          */
-        OSCListener(std::unique_ptr<OSCHandler>handler_ptr, int port);
+        osc_listener(std::unique_ptr<osc_handler>handler_ptr, int port);
 
         /**
-         * Returns true if the OSCListener is currently listening for UDP OSC
+         * Returns true if the osc_listener is currently listening for UDP OSC
          * messages.
          * @return see description
          */
-        bool IsIncomingPortOpen();
+        bool is_incoming_port_open();
 
         /**
          * Returns true if the Sonic Pi server listening to has not started,
          * and the listener is still running.
          * @return see description
          */
-        bool waitForServer();
+        bool wait_for_server();
 
         /**
          * Returns true if the Sonic Pi server has started.
          * @return see description
          */
-        bool isServerStarted();
+        bool is_server_started();
 
         /**
          * Signals to the listener thread if one exists that it should stop at
@@ -61,11 +58,11 @@ class OSCListener {
         void start();
 
     private:
-        std::unique_ptr<OSCHandler> handler;
+        std::unique_ptr<osc_handler> handler;
         std::atomic<bool> incoming_port_open;
         std::atomic<bool> stop_server;
         int port;
-        bool continueListening();
+        bool continue_listening();
 };
 
 #endif

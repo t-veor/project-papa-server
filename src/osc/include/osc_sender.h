@@ -7,19 +7,19 @@
  * A class for sending OSC messages.
  * Simple wrapper around the oscpkt UDP library to send OSC messages using UDP.
  */
-class OSCSender {
+class osc_sender {
     public:
         /**
-         * Constructs an OSCSender.
+         * Constructs an osc_sender.
          * @param port the port to send outgoing messages on
          */
-        OSCSender(int port);
+        osc_sender(int port);
 
         /**
          * Send a OSC message.
          * @param m the oscpkt::Message you wish to send
          */
-        void sendOSC(oscpkt::Message m);
+        void send_osc(oscpkt::Message m);
 
     private:
         int port;

@@ -10,21 +10,21 @@
  * A OSC message handler class.
  * It decodes OSC messages and acts appropriately with their contents.
  */
-class OSCHandler {
+class osc_handler {
     public:
         /**
-         * Constructs an OSCHandler.
+         * Constructs an osc_handler.
          */
-        OSCHandler();
-        virtual ~OSCHandler() {}
+        osc_handler();
+        virtual ~osc_handler() {}
 
         /**
          * Given a char buffer, decodes all possible messages in the buffer and
          * handles each one accordingly.
          * @param buffer Character buffer, which should be obtained from
-         *               oscpkt::UupSocket#buffer
+         *               oscpkt::UdpSocket#buffer
          */
-        void handleMessage(std::vector<char> buffer);
+        void handle_message(std::vector<char> buffer);
 
         /**
          * Boolean flag to indicate if the stop signal from the server has been
@@ -40,7 +40,7 @@ class OSCHandler {
 
     protected:
         /**
-         * Handles message objects.  This is the function that handleMessage
+         * Handles message objects.  This is the function that handle_message
          * actually calls to act upon every message it decodes.  You can
          * override it in subclasses to provide different behavior.
          * @param msg pointer to message object
