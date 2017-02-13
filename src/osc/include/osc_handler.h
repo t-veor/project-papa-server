@@ -16,6 +16,7 @@ class OSCHandler {
          * Constructs an OSCHandler.
          */
         OSCHandler();
+        virtual ~OSCHandler() {}
 
         /**
          * Given a char buffer, decodes all possible messages in the buffer and
@@ -36,6 +37,16 @@ class OSCHandler {
          * far received.
          */
         std::atomic<bool> server_started;
+
+    protected:
+        /**
+         * Handles message objects.  This is the function that handleMessage
+         * actually calls to act upon every message it decodes.  You can
+         * override it in subclasses to provide different behavior.
+         * @param msg pointer to message object
+         */
+        virtual void handle(oscpkt::Message* msg);
+
     private:
         oscpkt::PacketReader pr;
 };

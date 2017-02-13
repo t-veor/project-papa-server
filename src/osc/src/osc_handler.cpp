@@ -11,33 +11,37 @@ void OSCHandler::handleMessage(std::vector<char> buffer) {
 
     oscpkt::Message* msg;
     while (pr.isOk() && (msg = pr.popMessage()) != 0) {
-        // TODO: fill out bodies
-        if (msg->match("/log/multi_message")) {
+        handle(msg);
+    }
+}
 
-        }
-        else if (msg->match("/log/info")) {
+void OSCHandler::handle(oscpkt::Message* msg) {
+    // TODO: fill out bodies
+    if (msg->match("/log/multi_message")) {
 
-        }
-        else if (msg->match("/error")) {
+    }
+    else if (msg->match("/log/info")) {
 
-        }
-        else if (msg->match("/syntax_error")) {
+    }
+    else if (msg->match("/error")) {
 
-        }
-        else if (msg->match("/update-info-text")) {
+    }
+    else if (msg->match("/syntax_error")) {
 
-        }
-        else if (msg->match("/exited")) {
-            signal_server_stop = true;
-        }
-        else if (msg->match("/exited-with-boot-error")) {
-            signal_server_stop = true;
-        }
-        else if (msg->match("/runs/all-completed")) {
-            
-        }
-        else if (msg->match("/ack")) {
-            server_started = true;
-        }
+    }
+    else if (msg->match("/update-info-text")) {
+
+    }
+    else if (msg->match("/exited")) {
+        signal_server_stop = true;
+    }
+    else if (msg->match("/exited-with-boot-error")) {
+        signal_server_stop = true;
+    }
+    else if (msg->match("/runs/all-completed")) {
+        
+    }
+    else if (msg->match("/ack")) {
+        server_started = true;
     }
 }
