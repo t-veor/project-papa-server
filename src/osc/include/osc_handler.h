@@ -7,7 +7,7 @@
 #include <vector>
 
 /**
- * A OSC message handler class.
+ * An OSC message handler class.
  * It decodes OSC messages and acts appropriately with their contents.
  */
 class osc_handler {
