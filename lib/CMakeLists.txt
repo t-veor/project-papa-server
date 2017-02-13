@@ -1,9 +1,11 @@
+set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 set(INCLUDE_DIRECTORIES
-    ${CMAKE_CURRENT_SOURCE_DIR}/websocketpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/server_shm
-    ${CMAKE_CURRENT_SOURCE_DIR}/oscpkt
+    ${LIB_DIR}/websocketpp
+    ${LIB_DIR}/server_shm
+    ${LIB_DIR}/oscpkt
     PARENT_SCOPE)
 
 set(INCLUDE_CATCH_DIRECTORY
-    ${CMAKE_CURRENT_SOURCE_DIR}/catch
+    ${LIB_DIR}/catch
     PARENT_SCOPE)

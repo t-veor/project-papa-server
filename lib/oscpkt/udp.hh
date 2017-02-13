@@ -45,6 +45,7 @@
 # include <netinet/in.h>
 # include <netdb.h>
 # include <sys/time.h>
+#include <unistd.h>
 #endif
 #include <cstring>
 #include <cstdio>
@@ -53,6 +54,7 @@
 #include <cassert>
 #include <string>
 #include <vector>
+#include <iostream>
 
 namespace oscpkt {
 
