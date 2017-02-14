@@ -7,7 +7,7 @@ This is the server counterpart to the Project Papa project.
 To use, clone the repository and use cmake to build.
 
 ```
-git clone https://github.com/project-papa/project-papa-server
+git clone https://github.com/project-papa/project-papa-server --recursive
 cd project-papa-server
 mkdir build && cd build
 cmake ..
@@ -35,7 +35,7 @@ top right
 With Git installed, clone your fork, and configure the repository
 
 ```
-git clone https://github.com/<<YOUR USERNAME>>/project-papa-server
+git clone https://github.com/<<YOUR USERNAME>>/project-papa-server --recursive
 cd project-papa-server
 git remote add upstream https://github.com/project-papa/project-papa-server
 ```
