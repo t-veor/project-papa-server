@@ -1,12 +1,10 @@
 #include <iostream>
 
-#include "osc_sender.h"
-#include "oscpkt.hh"
+#include "pi_websocket_server.h"
 
 int main() {
-    osc_sender sender(4557);
-    oscpkt::Message m("/run-code");
-    m.pushStr("PROJECT_PAPA");
-    m.pushStr("live_loop :test do\nplay :c\nsleep 1\nend");
-    sender.send_osc(m);
+    pi_ws_server server(9162);
+
+    server.start_server();
+    server.join();
 }

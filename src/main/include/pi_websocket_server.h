@@ -1,0 +1,50 @@
+#ifndef PI_WS_SERVER_H
+#define PI_WS_SERVER_H
+
+#define GUI_ID "PROJECT_PAPA"
+
+#include "rapidjson/document.h"
+
+#include "server.h"
+#include "osc_sender.h"
+#include "oscpkt.hh"
+
+class pi_ws_server : public server {
+    public:
+        pi_ws_server(int port, int pi_port=4557) :
+            server(port), sender(pi_port)
+    {
+    }
+
+    protected:
+        void on_message(connection conn, message msg) {        
+            rapidjson::Document d;
+
+            if (d.Parse(msg->string().c_str()).HasParseError())
+                return;
+
+            if (!d.HasMember("command") || !d["command"].IsString())
+                return;
+
+            std::string command = d["command"].GetString();
+
+            if (command == "stop-all-jobs") {
+                oscpkt::Message m("/stop-all-jobs");
+                m.pushStr(GUI_ID);
+                sender.send_osc(m);
+            }
+            else if (command == "run-code") {
+                if (d.HasMember("code") && d["code"].IsString()) {
+                    // TODO: set up prettier parsing
+                    oscpkt::Message m("/run-code");
+                    m.pushStr(GUI_ID);
+                    m.pushStr(d["code"].GetString());
+                    sender.send_osc(m);
+                }
+            }
+        }
+
+        osc_sender sender;
+};
+
+#endif
