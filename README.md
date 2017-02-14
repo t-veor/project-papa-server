@@ -35,9 +35,9 @@ top right
 With Git installed, clone your fork, and configure the repository
 
 ```
-git clone https://github.com/<<YOUR USERNAME>>/project-papa
-cd project-papa
-git add remote upstream https://github.com/project-papa/project-papa
+git clone https://github.com/<<YOUR USERNAME>>/project-papa-server
+cd project-papa-server
+git remote add upstream https://github.com/project-papa/project-papa-server
 ```
 
 You will be making changes to your local fork, pushing them, then opening pull
