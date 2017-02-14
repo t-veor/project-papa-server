@@ -4,6 +4,8 @@ file(GLOB SOURCES "src/*.cpp")
 
 add_executable(server ${SOURCES})
 
+target_link_libraries(server osc_interface)
+
 target_link_libraries(server rt)
 target_link_libraries(server pthread)
 
