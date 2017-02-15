@@ -44,8 +44,9 @@ class osc_handler {
          * actually calls to act upon every message it decodes.  You can
          * override it in subclasses to provide different behavior.
          * @param msg pointer to message object
+         * @return true if the message was succesfully handled, false otherwise
          */
-        virtual void handle(oscpkt::Message* msg);
+        virtual bool handle(oscpkt::Message* msg);
 
     private:
         oscpkt::PacketReader pr;

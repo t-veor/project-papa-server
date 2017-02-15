@@ -15,7 +15,7 @@ void osc_handler::handle_message(std::vector<char> buffer) {
     }
 }
 
-void osc_handler::handle(oscpkt::Message* msg) {
+bool osc_handler::handle(oscpkt::Message* msg) {
     if (msg->match("/exited")) {
         signal_server_stop = true;
     }
@@ -25,4 +25,8 @@ void osc_handler::handle(oscpkt::Message* msg) {
     else if (msg->match("/ack")) {
         server_started = true;
     }
+    else {
+        return false;
+    }
+    return true;
 }
