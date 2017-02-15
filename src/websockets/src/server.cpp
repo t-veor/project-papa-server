@@ -31,6 +31,17 @@ void server::join() {
     server_thread.join();
 }
 
+void server::broadcast_message(std::string message) {
+    // get_connections has a lock around it and
+    // send is thread-safe, so this function should be fine
+    for (auto conn : wss.get_connections()) {
+        auto send_stream = std::make_shared<ws_server::SendStream>();
+        *send_stream << message;
+
+        wss.send(conn, send_stream);
+    }
+}
+
 void server::on_message(connection conn, message msg) {
     std::string message_str = msg->string();
     std::cout << message_str << "\n";
