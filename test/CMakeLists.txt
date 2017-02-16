@@ -11,12 +11,6 @@ target_link_libraries(tests osc_interface)
 
 target_link_libraries(tests pthread)
 
-# Boost
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost REQUIRED COMPONENTS system chrono)
-include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(tests ${Boost_LIBRARIES})
 
 
