@@ -1,12 +1,15 @@
 #include <iostream>
 
-#include "osc_sender.h"
-#include "oscpkt.hh"
+#include "pi_websocket_server.h"
+#include "pi_osc_handler.h"
+#include "osc_listener.h"
 
 int main() {
-    osc_sender sender(4557);
-    oscpkt::Message m("/run-code");
-    m.pushStr("PROJECT_PAPA");
-    m.pushStr("live_loop :test do\nplay :c\nsleep 1\nend");
-    sender.send_osc(m);
+    auto s = std::make_shared<pi_ws_server>(9162);
+    s->start_server();
+
+    auto handler = std::make_unique<pi_osc_handler>(s);
+    osc_listener listener(std::move(handler), 4558);
+
+    listener.start();
 }

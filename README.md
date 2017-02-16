@@ -7,7 +7,7 @@ This is the server counterpart to the Project Papa project.
 To use, clone the repository and use cmake to build.
 
 ```
-git clone https://github.com/project-papa/project-papa-server
+git clone https://github.com/project-papa/project-papa-server --recursive
 cd project-papa-server
 mkdir build && cd build
 cmake ..
@@ -16,6 +16,90 @@ make
 
 This will create a build directory and a `server` executable in the build
 directory.
+
+## Connecting to the server
+
+By default, the server is listening to `ws://localhost:9612`. You can currently
+send it two messages of the forms
+
+```json
+{ "command": "stop-all-jobs" }
+```
+
+```json
+{ "command": "run-code", "code": "# ruby code here" }
+```
+
+The server will also relay messages from the server and broadcast them to any
+connected sockets. See the [Sonic Pi
+API](https://github.com/samaaron/sonic-pi/wiki/Sonic-Pi-Internals----GUI-Ruby-API)
+for an explanation of the different messages. Here are some examples of the
+formats of the messages: (TODO: replace this with a proper specification,
+probably)
+
+```json
+{
+  "message_type": "log/info",
+  "message": {
+    "style": 0,
+    "body": "Studio: Pausing SuperCollider audio server"
+  }
+}
+```
+
+```json
+{
+  "message_type": "log/multi_message",
+  "message": {
+    "job_id": 6,
+    "thread_name": "",
+    "runtime": "22.8462",
+    "messages": [
+      {
+        "type": 5,
+        "body": "synced :heartbeat (Run 6)"
+      },
+      {
+        "type": 0,
+        "body": "sample \"/usr/share/sonic-pi/samples\",\n           \"bd_haus.flac\", {amp: 0.6, lpf: 80}"
+      },
+      {
+        "type": 4,
+        "body": "cue :base"
+      },
+      {
+        "type": 6,
+        "body": "sync :heartbeat"
+      }
+    ]
+  }
+}
+```
+
+```json
+{
+  "message_type": "error",
+  "message": {
+    "job_id": 2,
+    "desc": "[buffer eval, line 1]\nThread death!\n undefined local variable or method `asdf&#39; for Runtime:SonicPiLang",
+    "backtrace": "eval:1:in `block (2 levels) in __spider_eval&#39;\n/usr/lib/sonic-pi/server/sonicpi/lib/sonicpi/lang/core.rb:3564:in `block in in_thread&#39;",
+    "line": 1
+  }
+}
+```
+
+```json
+{
+  "message_type": "/syntax_error",
+  "message": {
+    "job_id": 3,
+    "desc": "[buffer eval, line 1] \n syntax error, unexpected keyword_do_block",
+    "error_line": "if do\n",
+    "line": 1,
+    "line_num_s": "1"
+  }
+}
+```
 
 ## Contributing
 
@@ -35,7 +119,7 @@ top right
 With Git installed, clone your fork, and configure the repository
 
 ```
-git clone https://github.com/<<YOUR USERNAME>>/project-papa-server
+git clone https://github.com/<<YOUR USERNAME>>/project-papa-server --recursive
 cd project-papa-server
 git remote add upstream https://github.com/project-papa/project-papa-server
 ```
