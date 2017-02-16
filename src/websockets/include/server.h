@@ -16,6 +16,7 @@ class server {
     public:
         /**
          * Constructs a server object at the specified port.
+         * @param port the port to listen to websockets on
          */
         server(int port);
         virtual ~server();
