@@ -135,6 +135,24 @@ git checkout master
 git pull upstream master
 ```
 
+### Building
+
+#### Mac
+
+Make sure you have [Homebrew](https://brew.sh/) installed.
+
+```
+brew install openssl boost
+```
+
+#### All Platforms
+
+```
+mkdir build
+cmake ..
+make # You will see a lot of warnings
+```
+
 ### Making Changes
 
 To make changes, you want to check out a new branch

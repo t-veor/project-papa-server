@@ -14,6 +14,21 @@ set(CMAKE_CONFIGURATION_TYPES Debug Release)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
+# Boost
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost REQUIRED COMPONENTS system chrono)
+include_directories(${Boost_INCLUDE_DIRS})
+
+# OpenSSL
+if(APPLE)
+  set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl/include")
+endif()
+
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE_DIR})
+
 enable_testing()
 
 add_subdirectory(lib)
