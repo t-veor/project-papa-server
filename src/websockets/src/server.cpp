@@ -6,7 +6,7 @@ server::server(int port) {
     wss.config.port = port;
 
     ws_server::Endpoint& default_endpoint = wss.endpoint["^/$"];
-    default_endpoint.on_message = [this] (auto conn, auto msg) {
+    default_endpoint.on_message = [this] (connection conn, message msg) {
         this->on_message(conn, msg);
     };
 }
