@@ -9,15 +9,24 @@
 #include "osc_sender.h"
 #include "oscpkt.hh"
 
+/**
+ * Server to connect with Sonic Pi.
+ */
 class pi_ws_server : public server {
     public:
+        /**
+         * Constructs a pi_ws_server.
+         * @param port the port to listen to websockets on
+         * @param pi_port the port to send OSC messages to sonic pi over,
+         *                default is 4557
+         */
         pi_ws_server(int port, int pi_port=4557) :
             server(port), sender(pi_port)
-    {
-    }
+        {
+        }
 
     protected:
-        void on_message(connection conn, message msg) {        
+        void on_message(connection _, message msg) {        
             rapidjson::Document d;
 
             if (d.Parse(msg->string().c_str()).HasParseError())
