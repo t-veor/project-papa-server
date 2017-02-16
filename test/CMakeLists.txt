@@ -9,7 +9,6 @@ file(GLOB SOURCES "*.cpp")
 add_executable(tests ${SOURCES})
 target_link_libraries(tests osc_interface)
 
-target_link_libraries(tests rt)
 target_link_libraries(tests pthread)
 
 # Boost
