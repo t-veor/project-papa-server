@@ -1,10 +1,10 @@
-include_directories(${include_directories} include)
+include_directories(${INCLUDE_DIRECTORIES} include)
 
-file(glob sources "src/*.cpp")
+file(GLOB SOURCES "src/*.cpp")
 
-add_library(osc_interface ${sources})
+add_library(scope_interface ${SOURCES})
 
-target_include_directories(scope_interface public
-    $<build_interface:${cmake_current_source_dir}/include>
-    $<install_interface:include>
-    private src)
+target_include_directories(scope_interface PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+    PRIVATE src)

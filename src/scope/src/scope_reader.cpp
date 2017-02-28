@@ -16,7 +16,7 @@ stereo_data scope_reader::read_scope(unsigned int scope_num) {
     scope_buffer_reader reader =
         shm_client->get_scope_buffer_reader(scope_num);
 
-    audio_data result;
+    stereo_data result;
     if (reader.valid()) {
         reader.pull(frames);
 
