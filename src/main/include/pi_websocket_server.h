@@ -9,6 +9,8 @@
 #include "osc_sender.h"
 #include "oscpkt.hh"
 
+#include "pi_subscriptions.h"
+
 /**
  * Server to connect with Sonic Pi.
  */
@@ -20,9 +22,10 @@ class pi_ws_server : public server {
          * @param pi_port the port to send OSC messages to sonic pi over,
          *                default is 4557
          */
-        pi_ws_server(int port, int pi_port=4557) :
+        pi_ws_server(int port, int pi_port=4557, int shm_port=4556) :
             server(port), sender(pi_port)
         {
+            subs.reset(new pi_subscriptions(this));
         }
 
     protected:
@@ -51,9 +54,15 @@ class pi_ws_server : public server {
                     sender.send_osc(m);
                 }
             }
+            else if (command == "subscribe") {
+                // TODO
+                // TODO
+                // TODO
+            }
         }
 
         osc_sender sender;
+        std::unique_ptr<pi_subscriptions> subs;
 };
 
 #endif
