@@ -1,4 +1,4 @@
 {
-  (sleep 2s; ./server) &
-  ./app/server/native/osx/ruby/bin/ruby ./app/server/bin/sonic-pi-server.rb;
+  (sleep 2s; ./server/server) &
+  ./server/app/server/native/osx/ruby/bin/ruby ./server/app/server/bin/sonic-pi-server.rb;
 }
