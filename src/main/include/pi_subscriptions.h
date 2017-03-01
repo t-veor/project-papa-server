@@ -7,6 +7,7 @@
 #include <unistd.h>
 #endif
 
+#include <iostream>
 #include <atomic>
 #include <mutex>
 #include <string>
@@ -18,9 +19,11 @@
 #include "scope_reader.h"
 #include "server.h"
 
+using namespace rapidjson;
+
 class pi_subscriptions {
     public:
-        pi_subscriptions(server* ws, int shm_port=4556) : ws(ws) {
+        pi_subscriptions(server* ws, int shm_port=4556) : ws(ws), stop(false) {
             reader.reset(new scope_reader(shm_port));
         }
 
@@ -36,6 +39,8 @@ class pi_subscriptions {
         }
 
         void run() {
+            std::cout << "Scope reader started\n";
+
             thread = std::thread([this] () {
                 while (!stop) {
                     int delay = 16;
@@ -49,12 +54,17 @@ class pi_subscriptions {
                     Value a;
                     a.SetObject();
 
-                    this->scope_mutex.lock();
+                    scope_mutex.lock();
 
-                    for (int i = 0; i < scopes.length; i++) {
-                        stereo_data data = this->reader->read_scope(scopes[i]);
+                    if (scopes.size() == 0) {
+                        scope_mutex.unlock();
+                        continue;
+                    }
 
-                        float acc = 0;
+                    for (int i = 0; i < scopes.size(); i++) {
+                        stereo_data data = reader->read_scope(scopes[i]);
+
+                        double acc = 0;
                         if (data.size() > 0) {
                             for (size_t j = 0; j < data[0].size(); j++) {
                                 acc += data[0][j] * data[0][j];
@@ -64,12 +74,13 @@ class pi_subscriptions {
                             acc = sqrt(acc);
                         }
 
-                        a.AddMember(std::to_string(i), acc, alloc);
+                        Value num = Value(std::to_string(scopes[i]).c_str(), alloc);
+                        a.AddMember(num, Value(acc).Move(), alloc);
                     }
 
                     d.AddMember("data", a, alloc);
 
-                    this->scope_mutex.unlock();
+                    scope_mutex.unlock();
 
                     StringBuffer buffer;
                     Writer<StringBuffer> writer(buffer);
@@ -77,6 +88,8 @@ class pi_subscriptions {
 
                     std::string json_string(buffer.GetString());
                     ws->broadcast_message(json_string);
+
+                    std::cout << json_string << "\n";
 
                     #ifdef _WIN32
                     Sleep(delay);
@@ -99,6 +112,6 @@ class pi_subscriptions {
         std::mutex scope_mutex;
 
         server* ws;
-}
+};
 
 #endif

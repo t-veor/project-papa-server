@@ -25,7 +25,8 @@ class pi_ws_server : public server {
         pi_ws_server(int port, int pi_port=4557, int shm_port=4556) :
             server(port), sender(pi_port)
         {
-            subs.reset(new pi_subscriptions(this));
+            subs.reset(new pi_subscriptions(this, shm_port));
+            subs->run();
         }
 
     protected:
@@ -55,9 +56,16 @@ class pi_ws_server : public server {
                 }
             }
             else if (command == "subscribe") {
-                // TODO
-                // TODO
-                // TODO
+                if (d.HasMember("scopes") && d["scopes"].IsArray()) {
+                    std::vector<unsigned int> scopes;
+                    for (auto itr = d["scopes"].Begin(); itr != d["scopes"].End(); ++itr) {
+                        if (itr->IsUint()) {
+                            scopes.push_back(itr->GetUint());
+                        }
+                    }
+
+                    subs->update_scopes(scopes);
+                }
             }
         }
 
