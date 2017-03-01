@@ -101,6 +101,36 @@ probably)
 }
 ```
 
+## Subscribing to oscilloscope data
+
+To subscribe to oscilloscope data, send a JSON object structured like this,
+with the scopes array containing the required scopes.
+
+```json
+{
+  "command": "subscribe",
+  "scopes": [1, 6, 12]
+}
+```
+
+The server will then start broadcasting messages in this format to all
+connected sockets.
+
+```json
+{
+  "message_type": "scope/amp",
+  "data": {
+    "1": 0.64,
+    "6": 0.23,
+    "12": 0.41,
+  }  
+}
+```
+
+Sending another subscribe command will replace the scopes in the broadcasts
+with the scopes specified. To get the server to stop sending messages, simply
+send a subscribe message with an empty scopes array.
+
 ## Contributing
 
 ### Setting up your workspace
