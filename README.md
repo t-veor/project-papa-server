@@ -90,7 +90,7 @@ probably)
 
 ```json
 {
-  "message_type": "/syntax_error",
+  "message_type": "syntax_error",
   "message": {
     "job_id": 3,
     "desc": "[buffer eval, line 1] \n syntax error, unexpected keyword_do_block",
