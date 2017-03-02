@@ -164,7 +164,7 @@ class pi_osc_handler : public osc_handler {
                 d.SetObject();
                 auto& alloc = d.GetAllocator();
 
-                d.AddMember("message_type", "/syntax_error", alloc);
+                d.AddMember("message_type", "syntax_error", alloc);
 
                 Value m;
                 m.SetObject();
