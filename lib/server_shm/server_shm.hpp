@@ -52,7 +52,7 @@ public:
 	typedef bi::allocator<scope_buffer_ptr, managed_shared_memory::segment_manager> scope_buffer_ptr_allocator;
 	typedef bi::vector<scope_buffer_ptr, scope_buffer_ptr_allocator> scope_buffer_vector;
 
-	server_shared_memory(managed_shared_memory & segment, int control_busses, int num_scope_buffers = 128):
+	server_shared_memory(managed_shared_memory & segment, int control_busses, int num_scope_buffers = 128) :
 		num_control_busses(control_busses),
 
 		scope_buffers(scope_buffer_ptr_allocator(segment.get_segment_manager()))
@@ -62,7 +62,7 @@ public:
 
 		for (int i = 0; i != num_scope_buffers; ++i) {
 			scope_buffer * raw_scope_ptr = (scope_buffer*)segment.allocate(sizeof(scope_buffer));
-			new(raw_scope_ptr) scope_buffer();
+			new(raw_scope_ptr)scope_buffer();
 			scope_buffer_ptr buf = raw_scope_ptr;
 			scope_buffers.push_back(buf);
 		}
@@ -95,11 +95,19 @@ public:
 	}
 
 private:
+#ifdef _WIN32
+	char shmem_name[24]; // VC 12 claims that sizeof(string) is 12, but generates a
+						 // 28-byte gap for shmem_name for some reason, so I've just
+						 // "manually" fixed it using possibly the most hacky thing
+						 // in the world
+#else
 	string shmem_name;
+#endif
 	int num_control_busses;
 	sh_float_ptr control_busses_; // control busses
 	scope_buffer_vector scope_buffers;
 };
+
 
 /*
 class server_shared_memory_creator
