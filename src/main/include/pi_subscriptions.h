@@ -62,6 +62,9 @@ class pi_subscriptions {
                     a.SetObject();
 
                     std::vector<unsigned int> scopes = get_scopes();
+                    if (scopes.size() == 0) {
+                        continue;
+                    }
 
                     bool has_members = false;
 
